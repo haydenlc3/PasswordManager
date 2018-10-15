@@ -22,11 +22,11 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author HLC
  */
-public class LoginFXMLController implements Initializable {
+public class LoginFXMLController extends PasswordManagerFXMLController implements Initializable {
     
     @FXML
     private AnchorPane rootpane;
-
+    
     @FXML
     private TextField username;
     
@@ -57,6 +57,7 @@ public class LoginFXMLController implements Initializable {
     public void signup() throws IOException {
         if (username.getLength() >= 6 && password.getLength() >= 8) {
             boolean hasNumber = false;
+            
             for (int i = 0; i < username.getLength(); i++){
                 if (Character.isDigit(username.getText().charAt(i))) {
                     hasNumber = true;
@@ -98,7 +99,7 @@ public class LoginFXMLController implements Initializable {
     
     @FXML
     public void goToSignup() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("SignupFXML.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("PasswordManagerFXML.fxml"));
         rootpane.getChildren().setAll(pane);
     }
     
@@ -110,7 +111,5 @@ public class LoginFXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
-    
 }
