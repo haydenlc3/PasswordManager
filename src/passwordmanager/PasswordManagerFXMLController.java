@@ -6,11 +6,14 @@
 package passwordmanager;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,6 +51,8 @@ public class PasswordManagerFXMLController implements Initializable {
     @FXML
     private Label error;
     
+    private final ObservableList<Password> data = FXCollections.observableArrayList();
+    
     public void clearFields() {
         username.clear();
         password.clear();
@@ -77,7 +82,11 @@ public class PasswordManagerFXMLController implements Initializable {
     @FXML
     public void addData() {
         if (isValidData()) {
-            table.getItems().add(new Object[]{username.getText(), password.getText(), site.getText(), email.getText(), java.time.LocalDate.now()});
+            data.add(new Password(username.getText(), password.getText(), site.getText(), email.getText(), LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MMMM yyyy"))));
+            table.setItems(data);
+            for (int i = 0; i < data.size(); i++) {
+                System.out.println(data.get(i));
+            }
         }
     }
     
@@ -104,6 +113,7 @@ public class PasswordManagerFXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        table.setItems(data);
         final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleAtFixedRate(new Runnable() {
             @Override

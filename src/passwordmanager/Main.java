@@ -24,6 +24,8 @@ public class Main extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setWidth(900);
+        primaryStage.setHeight(520);
         primaryStage.setResizable(false);
         primaryStage.setTitle("Password Manager");
         primaryStage.show();
