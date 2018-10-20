@@ -101,6 +101,7 @@ public class LoginFXMLController extends PasswordManagerFXMLController implement
     public void goToSignup() throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("PasswordManagerFXML.fxml"));
         rootpane.getChildren().setAll(pane);
+        loadTable();
     }
     
     @FXML
